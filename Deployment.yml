@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: gem-cpbe-demo
+    app.kubernetes.io/instance: gem-eks    
+  name: gem-cpbe-demo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gem-cpbe-demo
+  template:
+    metadata:
+      labels:
+        app: gem-cpbe-demo
+    spec:
+      containers:
+        - image: 947681381905.dkr.ecr.ap-south-1.amazonaws.com/gem-cpbe-demo:latest
+          imagePullPolicy: Always
+          name: gem-cpbe-demo
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,6 @@
+FROM adoptopenjdk/openjdk8
+MAINTAINER sangameshwar.patil@geminisolutions.com
+COPY target/Contripoint*.jar /home/
+WORKDIR /home/
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","Contripoint-0.0.1-SNAPSHOT.jar"]
