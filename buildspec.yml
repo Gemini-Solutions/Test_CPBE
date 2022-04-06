@@ -5,8 +5,7 @@ phases:
   pre_build:
     commands:
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 947681381905.dkr.ecr.ap-south-1.amazonaws.com
-      - docker pull 947681381905.dkr.ecr.ap-south-1.amazonaws.com/gem-cpbe-demo:latest
-
+   
   build:
     commands:     
       - docker build -t gem-cpbe-demo .
