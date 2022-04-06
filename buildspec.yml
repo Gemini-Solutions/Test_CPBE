@@ -4,24 +4,16 @@ phases:
 
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
-      - docker pull $REPOSITORY_URI:$IMAGE_TAG
-      
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 947681381905.dkr.ecr.ap-south-1.amazonaws.com
+      - docker pull 947681381905.dkr.ecr.ap-south-1.amazonaws.com/gem-cpbe-demo:latest
 
   build:
-    commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
+    commands:     
       - docker build -t gem-cpbe-demo .
       - docker tag gem-cpbe-demo:latest 947681381905.dkr.ecr.ap-south-1.amazonaws.com/gem-cpbe-demo:latest
 
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - echo Push the latest image to cluster
+      - docker push 947681381905.dkr.ecr.ap-south-1.amazonaws.com/gem-cpbe-demo:latest
       - kubectl apply -f Deployment.yaml
       - kubectl rollout restart -f Deployment.yaml
