@@ -16,8 +16,8 @@ phases:
   pre_build:
     commands:
       - aws configure
-      - AKIA5ZJRWJYI2DGBWXOF
-      - 2aH9lo0COG2Xer6zh570lZHjuwGCzq9RzLsDqjeJ
+      - AWS Access Key ID:=AKIA5ZJRWJYI2DGBWXOF
+      - AWS Secret Access Key:=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
       - echo Logging in to Amazon EKS...
       - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME
       - echo check config 
