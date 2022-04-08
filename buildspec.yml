@@ -19,11 +19,7 @@ phases:
       - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME
       - echo check config 
       - kubectl config view --minify
-      - aws configure
-      - AWS Access Key ID: AKIA5ZJRWJYI2DGBWXOF
-      - AWS Secret Access Key: 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
-      - Default region name: *
-      - Default output format: *
+      - aws configure= $AWS Access Key ID=AKIA5ZJRWJYI2DGBWXOF $AWS Secret Access Key=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 $Default region name=ap-south-1 Default output format=*
       - echo check kubectl access
       - kubectl get svc
       - echo Logging in to Amazon ECR...
