@@ -12,14 +12,14 @@ phases:
       - source ~/.bashrc
       - echo 'Check kubectl version'
       - kubectl version --short --client
+      - export AWS_PROFILE=~/.aws/credentials
 
   pre_build:
     commands:
       - echo Logging in to Amazon EKS...
       - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME
       - echo check config 
-      - kubectl config view --minify
-      - export AWS_PROFILE=~/.aws/credentials
+      - kubectl config view --minify      
       - echo check kubectl access
       - kubectl get svc
       - echo Logging in to Amazon ECR...
