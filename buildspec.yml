@@ -22,7 +22,7 @@ phases:
       - aws configure
       - AWS Access Key ID: AKIA5ZJRWJYI2DGBWXOF
       - AWS Secret Access Key: 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
-      - Default region name: ap-south-1
+      - Default region name: *
       - Default output format: *
       - echo check kubectl access
       - kubectl get svc
