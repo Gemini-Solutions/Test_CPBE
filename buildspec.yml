@@ -12,8 +12,7 @@ phases:
       - source ~/.bashrc
       - echo 'Check kubectl version'
       - kubectl version --short --client
-      - export AWS_PROFILE=~/.aws/credentials
-
+     
   pre_build:
     commands:
       - echo Logging in to Amazon EKS...
