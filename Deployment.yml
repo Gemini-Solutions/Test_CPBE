@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app.kubernetes.io/name: gem-cpbe-demo
-    app.kubernetes.io/instance: gem-eks    
   name: gem-cpbe-demo-deployment
+  namespace: gem-cpbe
+  labels:
+    app: gem-cpbe-demo
 spec:
   replicas: 1
   selector:
@@ -15,9 +15,20 @@ spec:
       labels:
         app: gem-cpbe-demo
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
       containers:
-        - image: 947681381905.dkr.ecr.ap-south-1.amazonaws.com/gem-cpbe-demo:latest
-          imagePullPolicy: Always
-          name: gem-cpbe-demo
-          ports:
-            - containerPort: 8080
+      - name: gem-cpbe-demo
+        image: 947681381905.dkr.ecr.ap-south-1.amazonaws.com/gem-cpbe-demo:latest
+        ports:
+        - name: http
+          containerPort: 80
+        imagePullPolicy: Always
